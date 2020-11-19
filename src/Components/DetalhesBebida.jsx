@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Card from './CardRecomend.jsx';
+import Card from './CardRecomend';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
@@ -16,7 +16,9 @@ import { funcIngredients, convertFavorite, CopyURL } from './DetalhesComida';
 function fotoPrincipal(details) {
   return (
     <img
-      src={details.strDrinkThumb} alt={details.strDrink} className="recipe-photo"
+      src={details.strDrinkThumb}
+      alt={details.strDrink}
+      className="recipe-photo"
       data-testid="recipe-photo"
     />
   );
@@ -81,7 +83,7 @@ function funcLinks(details, favority, setFavority, copy, copiador) {
           CopyURL();
         }}
       >
-        <img src={shareIcon} alt="like icon" className="icon" data-testid={'share-btn'} />
+        <img src={shareIcon} alt="like icon" className="icon" data-testid="share-btn" />
       </Link>
       {copy ? <span>Link copiado!</span> : null}
     </div>
@@ -107,18 +109,26 @@ export default function Detalhes(props) {
       <div className="DetelhesBuddy">
         {funcLinks(details, favority, setFavority, copy, copiador)}
         <h5 className="recipe-category" data-testid="recipe-category">
-          {`${details.strCategory}-${Alcoholic}`}</h5>
+          {`${details.strCategory}-${Alcoholic}`}
+        </h5>
         <h3 className="subTitle">Ingredients</h3>
-        <ul className="yellowCamp"> {ingredientes.map((item, index) => (
-          <li key={item.ingrediente} data-testid={`${index}-ingredient-name-and-measure`}>
-            {item.ingrediente}- {item.quantidade}
-          </li>
-        ))}
+        <ul className="yellowCamp">
+          {' '}
+          {ingredientes.map((item, index) => (
+            <li key={item.ingrediente} data-testid={`${index}-ingredient-name-and-measure`}>
+              {item.ingrediente}
+              -
+              {item.quantidade}
+            </li>
+          ))}
         </ul>
         <h3 className="subTitle">Instructions:</h3>
         <p className="yellowCamp" data-testid="instructions">{details.strInstructions}</p>
         <h3 className="subTitle">Recomendações</h3>
-        <div style={{ display: 'flex', flex: 1, flexGrow: 1, flexDirection: 'row' }}>
+        <div style={{
+          display: 'flex', flex: 1, flexGrow: 1, flexDirection: 'row',
+        }}
+        >
           <button onClick={() => setIndexRecom(indexRecom - 1)}>{'<'}</button>
           {ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom, location)}
           <button onClick={() => setIndexRecom(indexRecom + 1)}>{'>'}</button>

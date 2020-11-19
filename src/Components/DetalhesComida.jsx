@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import Card from './CardRecomend.jsx';
+import Card from './CardRecomend';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
@@ -27,7 +27,9 @@ import shareIcon from '../images/shareIcon.svg';
 function fotoPrincipal(details) {
   return (
     <img
-      src={details.strMealThumb} alt={details.strMeal} className="recipe-photo"
+      src={details.strMealThumb}
+      alt={details.strMeal}
+      className="recipe-photo"
       data-testid="recipe-photo"
     />
   );
@@ -122,9 +124,9 @@ function ReverseArrayFoto(sugestDrink, indexRecom, setIndexRecom, location) {
 export function funcIngredients(ingredientes, details) {
   for (let i = 1; i < 20; i += 1) {
     if (
-      details[`strIngredient${i}`] !== null &&
-      details[`strIngredient${i}`] !== '' &&
-      details[`strIngredient${i}`] !== undefined
+      details[`strIngredient${i}`] !== null
+      && details[`strIngredient${i}`] !== ''
+      && details[`strIngredient${i}`] !== undefined
     ) {
       ingredientes.push({
         ingrediente: details[`strIngredient${i}`],
@@ -159,7 +161,7 @@ function funcLinks(details, favority, setFavority, copiador, copy) {
           CopyURL();
         }}
       >
-        <img src={shareIcon} alt="like icon" className="icon" data-testid={'share-btn'} />
+        <img src={shareIcon} alt="like icon" className="icon" data-testid="share-btn" />
       </Link>
       {copy ? <span>Link copiado!</span> : null}
     </div>
@@ -188,7 +190,9 @@ export default function Detalhes(props) {
         <ul className="yellowCamp">
           {novosIngredientes.map((item, index) => (
             <li key={item.ingrediente} data-testid={`${index}-ingredient-name-and-measure`}>
-              {item.ingrediente}- {item.quantidade}
+              {item.ingrediente}
+              -
+              {item.quantidade}
             </li>
           ))}
         </ul>
@@ -197,7 +201,10 @@ export default function Detalhes(props) {
         <h3 className="subTitle">Video</h3>
         <ReactPlayer url={details.strYoutube} data-testid="video" width="100%" height="100%" />
         <h3 className="subTitle">Recomendações</h3>
-        <div style={{ display: 'flex', flex: 1, flexGrow: 1, flexDirection: 'row' }}>
+        <div style={{
+          display: 'flex', flex: 1, flexGrow: 1, flexDirection: 'row',
+        }}
+        >
           <button onClick={() => setIndexRecom(indexRecom - 1)}>{'<'}</button>
           {ReverseArrayFoto(sugestDrink, indexRecom, setIndexRecom, location)}
           <button onClick={() => setIndexRecom(indexRecom + 1)}>{'>'}</button>
