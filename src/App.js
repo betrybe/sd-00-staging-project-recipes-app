@@ -1,40 +1,50 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Login from './Pages/TelaLogin';
-import TelaInicial from './Pages/TelaPrincipal';
-import DetalhesComidas from './Pages/TelaDetalhesComida';
-import DetalhesBebidas from './Pages/TelaDetalhesBebida';
-import ProcessoReceitas from './Pages/TelaReceitaProcesso';
-import Explorar from './Pages/TelaExplorar';
-import ExplorarBebidaComida from './Pages/TelaExplorarBebidaComida';
-import ExplorarIngredientes from './Pages/TelaExplorarIngredientes';
-import ExplorarComidasAreas from './Pages/TelaExplorarLocal';
-import Perfil from './Pages/TelaPerfil';
-import ReceitasFeitas from './Pages/TelaReceitaFeitas';
-import ReceitasFavoritas from './Pages/TelaReceitasFavoritas';
+import Login from './pages/Login/Login';
+// import Bebidas from './pages/Bebidas/Bebidas';
+import ComidaDetalhes from './pages/Comidas/ComidaDetalhes/ComidaDetalhes';
+// import BebidaDetalhes from './pages/Bebidas/BebidaDetalhes/BebidaDetalhes';
+import Provider from './contexts/Provider';
+import ComidaInProgress from './pages/Comidas/ComidaDetalhes/ComidaInProgress';
+import Home from './pages/Home/Home';
+import Explorar from './pages/Explorar/Explorar';
+import ExplorarComOuBeb from './pages/Explorar/ExplorarComOuBeb';
+import ExplorarIngredientes from './pages/Explorar/ExplorarIngredientes';
+import ExplorarArea from './pages/Explorar/ExplorarArea';
+import Perfil from './pages/Perfil/Perfil';
+import ReceitasFeitas from './pages/Perfil/ReceitasFeitas/ReceitasFeitas';
+import ReceitasFavoritas from './pages/Perfil/ReceitasFavoritas/ReceitasFavoritas';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
-    <Switch>
-      <Route path="/comidas/:id_da_receita/in-progress" component={ProcessoReceitas} />
-      <Route path="/bebidas/:id_da_receita/in-progress" component={ProcessoReceitas} />
-      <Route path="/comidas/:id_da_receita" component={DetalhesComidas} />
-      <Route path="/bebidas/:id_da_receita" component={DetalhesBebidas} />
-      <Route exact path="/comidas" component={TelaInicial} />
-      <Route exact path="/bebidas" component={TelaInicial} />
-      <Route path="/explorar/comidas/ingredientes" component={ExplorarIngredientes} />
-      <Route path="/explorar/bebidas/ingredientes" component={ExplorarIngredientes} />
-      <Route path="/explorar/comidas/area" component={ExplorarComidasAreas} />
-      <Route path="/explorar/comidas" component={ExplorarBebidaComida} />
-      <Route path="/explorar/bebidas" component={ExplorarBebidaComida} />
-      <Route path="/explorar" component={Explorar} />
-      <Route path="/receitas-feitas" component={ReceitasFeitas} />
-      <Route path="/receitas-favoritas" component={ReceitasFavoritas} />
-      <Route path="/perfil" component={Perfil} />
-      <Route exact path="/" component={Login} />
-      {/* <Route render={() => <h1 className="naoEncontrada">Página não encontrada</h1>} /> */}
-    </Switch>
+    <Provider>
+      <div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/comidas" component={Home} />
+            <Route exact path="/bebidas" component={Home} />
+            <Route exact path="/comidas/:id" component={ComidaDetalhes} />
+            <Route exact path="/bebidas/:id" component={ComidaDetalhes} />
+            <Route exact path="/comidas/:id/in-progress" component={ComidaInProgress} />
+            <Route exact path="/bebidas/:id/in-progress" component={ComidaInProgress} />
+            <Route exact path="/explorar/comidas/area" component={ExplorarArea} />
+            <Route exact path="/explorar/bebidas/ingredientes" component={ExplorarIngredientes} />
+            <Route exact path="/explorar/comidas/ingredientes" component={ExplorarIngredientes} />
+            <Route exact path="/explorar/bebidas" component={ExplorarComOuBeb} />
+            <Route exact path="/explorar/comidas" component={ExplorarComOuBeb} />
+            <Route exact path="/explorar" component={Explorar} />
+            <Route exact path="/perfil" component={Perfil} />
+            <Route exact path="/receitas-feitas" component={ReceitasFeitas} />
+            <Route exact path="/receitas-favoritas" component={ReceitasFavoritas} />
+            <Route exact path="/" component={Login} />
+            <Route component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </Provider>
   );
 }
 
