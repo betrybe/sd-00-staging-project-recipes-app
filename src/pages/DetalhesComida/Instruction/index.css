@@ -1,0 +1,28 @@
+.instruc-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.instruc {
+  align-items: flex-end;
+  color: black;
+  display: flex;
+  font-family: Roboto, sans-serif;
+  font-size: 26px;
+  font-style: normal;
+  height: 30px;
+  left: 10px;
+  letter-spacing: 0.03em;
+  line-height: 30px;
+  top: 407px;
+  width: 147px;
+}
+
+.intruc-div {
+  background: darkgray;
+  border-radius: 4px;
+  left: 11px;
+  top: 441px;
+  width: 341px;
+}
