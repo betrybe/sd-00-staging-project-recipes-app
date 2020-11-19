@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './login.css';
 import AppContext from '../../contexts/AppContext';
 
@@ -67,6 +67,7 @@ function Login() {
   const [emailChecked, setEmailChecked] = useState(false);
   const [passwordChecked, setPasswordChecked] = useState(false);
   const { email, setEmail, setPassword } = useContext(AppContext);
+  const history = useHistory();
 
   const handleEmail = (e) => {
     if (checkEmail(e.target.value, setEmailChecked) === true) setEmail(e.target.value);
@@ -76,10 +77,12 @@ function Login() {
     if (checkPassword(e.target.value, setPasswordChecked) === true) setPassword(e.target.value);
   };
 
-  const saveToStorage = () => {
+  const saveToStorage = (histo) => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email }));
+
+    histo.push('/comidas');
   };
 
   /*  const teclaEnter = (tecla, email) => {
@@ -100,9 +103,9 @@ function Login() {
             data-testid="login-submit-btn"
             type="button"
             disabled={!(emailChecked && passwordChecked)}
-            onClick={() => saveToStorage(email)}
+            onClick={() => saveToStorage(history)}
           >
-            <Link to="/comidas">Entrar</Link>
+            Entrar
           </button>
         </div>
       </div>

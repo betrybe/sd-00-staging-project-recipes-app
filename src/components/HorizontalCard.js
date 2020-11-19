@@ -4,14 +4,7 @@ import PropTypes from 'prop-types';
 import shareI from '../images/shareIcon.svg';
 import blackHI from '../images/blackHeartIcon.svg';
 import AppContext from '../contexts/AppContext';
-
-function handleClick(history, type, id) {
-  if (type === 'comida') {
-    history.push(`/comidas/${id}`);
-  } else {
-    history.push(`/bebidas/${id}`);
-  }
-}
+import * as fn from '../services/share';
 
 function shareBt(id, type, setCopiado) {
   let linkToCopy;
@@ -56,7 +49,7 @@ function HCard({ card, index, favOrDone }) {
   return (
     <button className="card-rec">
       <div className="card">
-        <button onClick={() => handleClick(history, card.type, card.id)}>
+        <button onClick={() => fn.handleClick(history, card.type, card.id)}>
           <img
             src={card.image}
             alt={card.name}
@@ -71,7 +64,7 @@ function HCard({ card, index, favOrDone }) {
           >
             {`${card.type === 'bebida' ? card.alcoholicOrNot : card.area} - ${card.category}`}
           </p>
-          <button onClick={() => handleClick(history, card.type, card.id)}>
+          <button onClick={() => fn.handleClick(history, card.type, card.id)}>
             <p data-testid={`${index}-horizontal-name`}>{card.name}</p>
           </button>
           <p data-testid={`${index}-horizontal-done-date`}>{card.doneDate}</p>

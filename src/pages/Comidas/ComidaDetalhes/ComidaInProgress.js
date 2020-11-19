@@ -8,24 +8,9 @@ import '../../../components/details.css';
 import DetailHeader from '../../../components/DetailHeader';
 import * as builder from '../../../services/builders';
 import Loading from '../../../components/Loading';
+import * as inProgress from '../../../services/in-progress';
 /* import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel'; */
 
-function disabling() {
-  let disabled = true;
-  let checked = 0;
-  const inputs = document.querySelectorAll('input');
-  inputs.forEach((input) => (input.checked ? (checked += 1) : 0));
-  if (checked > 0 && checked === inputs.length) {
-    disabled = false;
-  }
-  return disabled;
-}
-
-function handleFinalizarReceita(history, details, Meal) {
-  history.push('/receitas-feitas');
-  storage.removeIPLS(Meal, details);
-  storage.setDoneLS(Meal, details);
-}
 
 const style = {
   position: 'fixed',
@@ -40,56 +25,6 @@ const styleNone = {
   textDecoration: 'none',
 };
 
-function checkLS(str, id, history) {
-  const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  if (!LS) {
-    return false;
-  }
-  if (LS.meals[id] && history.location.pathname.includes('comidas')) {
-    const newCheck = LS.meals[id].some((each) => each === str);
-    return newCheck;
-  } else if (LS.cocktails[id] && history.location.pathname.includes('bebidas')) {
-    const newCheck = LS.cocktails[id].some((each) => each === str);
-    return newCheck;
-  }
-  return false;
-}
-
-function isChecked(setUtilizados, utilizados, history, id, e) {
-  const line = document.getElementsByClassName(`${e.target.id}`)[0];
-  line.style.textDecoration = 'line-through';
-  setUtilizados([...utilizados, e.target.id]);
-  const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  if (history.location.pathname.includes('comidas')) {
-    LS.meals[id] = [...utilizados, e.target.id];
-  } else if (history.location.pathname.includes('bebidas')) {
-    LS.cocktails[id] = [...utilizados, e.target.id];
-  }
-  localStorage.setItem('inProgressRecipes', JSON.stringify(LS));
-}
-
-function notChecked(setUtilizados, utilizados, history, id, e) {
-  const line1 = document.getElementsByClassName(`${e.target.id}`)[0];
-  line1.style.textDecoration = 'none';
-  const newArr = utilizados.filter((data) => data !== e.target.id);
-  setUtilizados(newArr);
-  const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  if (history.location.pathname.includes('comidas')) {
-    LS.meals[id] = newArr;
-  } else if (history.location.pathname.includes('bebidas')) {
-    LS.cocktails[id] = newArr;
-  }
-  localStorage.setItem('inProgressRecipes', JSON.stringify(LS));
-}
-
-function handleDashed(e, setUtilizados, utilizados, id, history) {
-  if (e.target.checked) {
-    isChecked(setUtilizados, utilizados, history, id, e);
-  } else {
-    notChecked(setUtilizados, utilizados, history, id, e);
-  }
-}
-
 function ingredientsList(details, setUtilizados, utilizados, id, history) {
   const quantities = builder.quantityBuilder(details);
   const ingredients = builder.ingredientBuilder(details);
@@ -102,14 +37,15 @@ function ingredientsList(details, setUtilizados, utilizados, id, history) {
           <li className="prog-list" data-testid={`${index}-ingredient-step`}>
             <input
               type="checkbox"
-              checked={checkLS(`${ingredients[index]} - ${element}`, id, history)}
+              checked={storage.checkLS(`${ingredients[index]} - ${element}`, id, history)}
               id={`${ingredients[index]} - ${element}`}
-              onChange={(e) => handleDashed(e, setUtilizados, utilizados, id, history)}
+              data-testid={`${ingredients[index]} - ${element}`}
+              onChange={(e) => inProgress.handleDashed(e, setUtilizados, utilizados, id, history)}
             />
             <label htmlFor={`${ingredients[index]} - ${element}`}>
               <span
                 style={
-                  checkLS(`${ingredients[index]} - ${element}`, id, history) ? styleDash : styleNone
+                  storage.checkLS(`${ingredients[index]} - ${element}`, id, history) ? styleDash : styleNone
                 }
                 className={`${ingredients[index]} - ${element} ing`}
               >
@@ -163,8 +99,8 @@ function ComidaInProgress() {
         className="start-btn"
         style={style}
         data-testid="finish-recipe-btn"
-        disabled={disabling()}
-        onClick={() => handleFinalizarReceita(history, details, Meal)}
+        disabled={inProgress.disabling()}
+        onClick={() => inProgress.handleFinalizarReceita(history, details, Meal)}
       >
         Finalizar receita
       </button>

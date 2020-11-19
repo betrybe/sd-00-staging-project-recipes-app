@@ -11,7 +11,6 @@ export function quantityBuilder(details) {
 }
 
 export function ingredientBuilder(details) {
-  console.log(details);
   const result = [];
   Object.entries(details).forEach((element) => {
     if (element[0].includes('strIngredient') && element[1] && element[1] !== ' ') {

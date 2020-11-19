@@ -6,7 +6,7 @@ import renderWithRouter from '../services/renderWithRouter';
 import Provider from '../contexts/Provider';
 import Home from '../pages/Home/Home';
 import SearchBar from '../components/SearchBar';
-import * as mockAPI from './mockAPI';
+import * as mockAPI from '../mocks/mockAPI';
 
 jest.spyOn(api, 'defaultMeals').mockImplementation(() => mockSuccessFood);
 jest.spyOn(api, 'defaultDrinks').mockImplementation(() => mockSuccessDrink);
@@ -93,7 +93,7 @@ describe('No filtro de categorias deve existir a opção de filtrar por todas as
     
     expect(getByTestId('All-category-filter')).toBeInTheDocument();
     fireEvent.click(getByTestId('All-category-filter'));
-    await waitFor(() => expect(api.defaultMeals).toHaveBeenCalledTimes(5));
+    await waitFor(() => expect(api.defaultMeals).toHaveBeenCalledTimes(6));
   });
 })
 
@@ -276,7 +276,7 @@ describe('Caso o filtro selecionado no momento seja selecionado de novo, o app d
     fireEvent.click(getByTestId('Beef-category-filter'));
     await waitFor(() => expect(api.byMealCategory).toHaveBeenCalled());
     fireEvent.click(getByTestId('Beef-category-filter'));
-    await waitFor(() => expect(api.defaultMeals).toHaveBeenCalledTimes(12));
+    await waitFor(() => expect(api.defaultMeals).toHaveBeenCalledTimes(13));
     const meals = require('../../cypress/mocks/meals');
     checkTwelveRec(meals.meals, 'Meal', getByTestId);
   });

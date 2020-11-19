@@ -15,7 +15,6 @@ function ReceitasFavoritas() {
       setFilters(favRecipes);
     }
   }, [fav]);
-  console.log(favorites);
   return (
     <div>
       <Header />

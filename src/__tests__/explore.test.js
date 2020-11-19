@@ -3,7 +3,7 @@ import { waitFor, fireEvent } from '@testing-library/react';
 import * as api from '../services/api';
 import renderWithRouter from '../services/renderWithRouter';
 import Provider from '../contexts/Provider';
-import * as mockAPI from './mockAPI';
+import * as mockAPI from '../mocks/mockAPI';
 import Explorar from '../pages/Explorar/Explorar';
 
 describe('Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de explorar', () => {
