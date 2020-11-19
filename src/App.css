@@ -1,3 +1,10 @@
+.naoEncontrada {
+  color: white;
+  margin: 20%;
+  text-align: center;
+
+}
+
 #meals {
   height: 100vh;
   width: 100%;
@@ -19,14 +26,14 @@
   /* transform-origin set in px for firefox compatibility */
   opacity: 0.6;
   transform-origin: 36px 66px;
-  animation: clink .8s infinite ease;
+  animation: clink 0.8s infinite ease;
 }
 
 #iceRight {
   /* transform-origin set in px for firefox compatibility */
   opacity: 0.6;
   transform-origin: 60px 78px;
-  animation: clink .8s .2s infinite ease;
+  animation: clink 0.8s 0.2s infinite ease;
 }
 
 #meals > span {
