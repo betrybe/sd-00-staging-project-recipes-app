@@ -1,0 +1,39 @@
+.header-top {
+  align-items: center;
+  background: orange;
+  color: white;
+  display: flex;
+  font-family: Gochi Hand, cursive;
+  font-size: larger;
+  justify-content: space-around;
+  width: 360px;
+}
+
+.search-icon-hidden {
+  width: 20px;
+}
+
+.header-bottom {
+  align-items: center;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.search-input {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.search-box {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.search-btn {
+  margin: 5px auto;
+  width: 40%;
+}

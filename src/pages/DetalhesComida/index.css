@@ -1,0 +1,26 @@
+body {
+  background: white;
+  height: 829px;
+  padding: 0;
+  width: 360px;
+}
+
+.start-recipe {
+  background: #6ce34f;
+  bottom: 0;
+  height: 76px;
+  position: fixed;
+  width: 360px;
+}
+
+.btn-text {
+  color: black;
+  font-family: Roboto, sans-serif;
+  font-size: 29px;
+  font-style: normal;
+  height: 34px;
+  left: 82px;
+  line-height: 34px;
+  text-align: center;
+  width: 183px;
+}
