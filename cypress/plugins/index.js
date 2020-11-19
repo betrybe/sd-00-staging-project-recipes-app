@@ -12,7 +12,7 @@
 // the project's config changing)
 
 const clipboardy = require('clipboardy');
-module.exports = ( on ) => {
+module.exports = ( on, config ) => {
     on('task', {
         getClipboard () {
             return clipboardy.readSync();
