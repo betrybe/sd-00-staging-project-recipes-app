@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clipBoard from 'clipboard-copy';
 import favIcon from '../../../images/whiteHeartIcon.svg';
