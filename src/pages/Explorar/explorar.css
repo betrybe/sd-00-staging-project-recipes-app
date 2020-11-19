@@ -1,0 +1,22 @@
+.explorar-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  margin: 5vh auto;
+  max-width: 80%;
+}
+
+.explorar-container button {
+  border-left: 8px solid rgb(255, 134, 0);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 300;
+  margin: 5vh 0 0;
+  width: 100%;
+}
+
+.explorar-container button:hover {
+  opacity: 0.75;
+}
