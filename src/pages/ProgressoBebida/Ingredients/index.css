@@ -1,0 +1,27 @@
+.container-ingredients {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+  padding: 0;
+}
+
+.ingredients-title {
+  color: black;
+  display: flex;
+  font-family: Roboto, sans-serif;
+  font-size: 26px;
+  height: 30px;
+  letter-spacing: 0.03em;
+  line-height: 30px;
+  padding: 0;
+  width: 147px;
+}
+
+.ingredients-box {
+  background: darkgray;
+  border-radius: 4px;
+  height: auto;
+  padding: 0;
+  width: 341px;
+}

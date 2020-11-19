@@ -1,0 +1,24 @@
+.thumbnail {
+  border-radius: 6px 6px 0 0;
+  height: 109px;
+  width: 161px;
+}
+
+.recipes-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.recipe-card {
+  border-radius: 6px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  height: 172px;
+  margin: 5px 0;
+  text-align: center;
+  width: 161px;
+}
+
+.recipes-container:last-child {
+  margin-bottom: 63px;
+}
