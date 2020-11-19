@@ -13,13 +13,6 @@
 
 const clipboardy = require('clipboardy');
 module.exports = ( on ) => {
-    on('before:browser:launch', (browser, launchOptions) => {
-        if (browser.name === 'chrome') {
-          launchOptions.args.push('--disable-dev-shm-usage');
-          return launchOptions;
-        }
-        return launchOptions;
-      });
     on('task', {
         getClipboard () {
             return clipboardy.readSync();
