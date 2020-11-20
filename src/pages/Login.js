@@ -16,11 +16,14 @@ function Login() {
     }
   }, [inputValues]);
 
-  const saveEmail = () => {
-    localStorage.user = JSON.stringify({ email });
-    localStorage.mealsToken = JSON.stringify(1);
-    localStorage.cocktailsToken = JSON.stringify(1);
-  };
+  // const saveEmail = () => {
+  //   const teste = {
+
+  //   }
+  //   localStorage.user = JSON.stringify({ email });
+  //   localStorage.mealsToken = JSON.stringify(1);
+  //   localStorage.cocktailsToken = JSON.stringify(1);
+  // };
 
   return (
     <div>
@@ -51,7 +54,7 @@ function Login() {
             data-testid="login-submit-btn"
             type="submit"
             disabled={isDisabled}
-            onClick={saveEmail}
+            // onClick={saveEmail}
           >
             Entrar
           </button>
