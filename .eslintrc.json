@@ -14,12 +14,12 @@
         ]
       }
     ],
-    // "no-underscore-dangle": [
-    //   "error", 
-    //   {
-    //     "allow": "__REDUX_DEV_TOOLS_EXTENSION_COMPOSE__"
-    //   }
-    // ],
+    "no-underscore-dangle": [
+      "error", 
+      {
+        "allow": "__REDUX_DEV_TOOLS_EXTENSION_COMPOSE__",
+      }
+    ],
     "react/prefer-stateless-function": 0,
     "arrow-parens": [2, "always"],
     "class-methods-use-this": ["off"],
