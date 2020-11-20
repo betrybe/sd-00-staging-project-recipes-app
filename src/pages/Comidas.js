@@ -2,9 +2,8 @@ import React from 'react';
 
 function Comidas() {
   return (
-    <div>
-      <h1>COmidas</h1>
-    </div>
+    <div>Aqui vão estar as comidas...</div>
   );
 }
+
 export default Comidas;
