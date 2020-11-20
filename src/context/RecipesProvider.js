@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import RecipesContext from './RecipesContext';
+// import React from 'react';
+// import PropTypes from 'prop-types';
+// import RecipesContext from './RecipesContext';
 
-function RecipesProvider({ children }) {
-  const contextState = {
-    loading: false,
-  };
+// function RecipesProvider({ children }) {
+//   const contextState = {
+//     loading: false,
+//   };
 
-  return (
-    <RecipesContext.Provider value={contextState}>
-      { children }
-    </RecipesContext.Provider>
-  );
-}
+//   return (
+//     <RecipesContext.Provider value={contextState}>
+//       { children }
+//     </RecipesContext.Provider>
+//   );
+// }
 
-RecipesProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+// RecipesProvider.propTypes = {
+//   children: PropTypes.node.isRequired,
+// };
 
-export default RecipesProvider;
+// export default RecipesProvider;
