@@ -24,6 +24,9 @@ function Login() {
   //   localStorage.mealsToken = JSON.stringify(1);
   //   localStorage.cocktailsToken = JSON.stringify(1);
   // };
+
+  const __REDUX_DEV_TOOLS_EXTENSION_COMPOSE__ = 'oi';
+  
   return (
     <div>
       <form>
