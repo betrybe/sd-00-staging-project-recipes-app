@@ -24,7 +24,6 @@ function Login() {
   //   localStorage.mealsToken = JSON.stringify(1);
   //   localStorage.cocktailsToken = JSON.stringify(1);
   // };
-
   return (
     <div>
       <form>
