@@ -1,35 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+// import { Link } from 'react-router-dom';
 
 function Login() {
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [inputValues, setInputValues] = useState({ email: '', password: '' });
-  const { email, password } = inputValues;
+  // const [isDisabled, setIsDisabled] = useState(true);
+  // const [inputValues, setInputValues] = useState({ email: '', password: '' });
+  // const { email, password } = inputValues;
 
-  useEffect(() => {
-    const checkEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+$/.test(email);
-    const checkPassword = 6;
-    if (password.length > checkPassword && checkEmail) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
-  }, [inputValues]);
-
-  // const saveEmail = () => {
-  //   const teste = {
-
+  // useEffect(() => {
+  //   const checkEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+$/.test(email);
+  //   const checkPassword = 6;
+  //   if (password.length > checkPassword && checkEmail) {
+  //     setIsDisabled(false);
+  //   } else {
+  //     setIsDisabled(true);
   //   }
-  //   localStorage.user = JSON.stringify({ email });
-  //   localStorage.mealsToken = JSON.stringify(1);
-  //   localStorage.cocktailsToken = JSON.stringify(1);
-  // };
+  // }, [inputValues]);
 
   return (
     <div>
       <form>
         <h1>Login</h1>
-        <input
+        {/* <input
           data-testid="email-input"
           type="text"
           name="email"
@@ -58,7 +49,7 @@ function Login() {
           >
             Entrar
           </button>
-        </Link>
+        </Link> */}
       </form>
     </div>
   );
