@@ -1,19 +1,19 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-
-import Provider from './context/AppProvider';
-
-import Rotas from './routes';
-
+import Provider from './context/Provider';
 import './App.css';
+import Router from './router/Router';
+import history from './helpers/History';
 
-const App = () => (
-  <div>
+function App() {
+  return (
     <Provider>
-      <BrowserRouter>
-        <Rotas />
+      <BrowserRouter history={ history }>
+        <Router />
       </BrowserRouter>
     </Provider>
-  </div>
-);
+
+  );
+}
+
 export default App;
