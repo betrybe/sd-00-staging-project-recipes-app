@@ -7,7 +7,7 @@ import ShareBtn from '../components/ShareBtn';
 import './RecipeInProgress.css';
 
 function DrinkInProgress(props) {
-  const { match: { params: { id } }, location: { pathname } } = props;
+  const { match: { params: { id } } } = props;
   const history = useHistory();
   const [recipe, setRecipe] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -209,7 +209,6 @@ DrinkInProgress.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
-  location: PropTypes.func.isRequired,
 };
 
 export default DrinkInProgress;
