@@ -15,6 +15,7 @@ function FoodInProgress(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [copied, setCopied] = useState('none');
   const textArea = useRef(null);
+  const now = new Date();
   let progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const zero = 0;
   if (progressRecipes === null) {
@@ -50,6 +51,12 @@ function FoodInProgress(props) {
     setRecipe(response.meals[0]);
   };
 
+  const verifyIngredientsChecked = () => {
+    const isAllChecked = !ingredients
+      .some((ingredient) => ingredient.isChecked === false);
+    setIsDisabled(!isAllChecked);
+  };
+
   const requestIngredients = () => {
     const twentyOne = 21;
     const TheIngredients = [];
@@ -69,11 +76,7 @@ function FoodInProgress(props) {
       }
     }
     setIngredients(TheIngredients);
-  };
-  const verifyIngredientsChecked = () => {
-    const isAllChecked = !ingredients
-      .some((ingredient) => ingredient.isChecked === false);
-    setIsDisabled(!isAllChecked);
+    verifyIngredientsChecked();
   };
 
   const setLocalIngredients = () => {
@@ -134,8 +137,21 @@ function FoodInProgress(props) {
     getLocalStorage();
   }, []);
 
-  const handleFinishedRecipe = (event) => {
-    event.preventDefault();
+  const handleFinishedRecipe = () => {
+    const finishedRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const arrayFinished = finishedRecipes !== null ? finishedRecipes : [];
+    arrayFinished.push({
+      id,
+      type: 'comida',
+      area: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+      doneDate: `Feita em: ${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`,
+      tags: recipe.strTags,
+    });
+    localStorage.setItem('doneRecipes', JSON.stringify(arrayFinished));
     history.push('/receitas-feitas');
   };
 
@@ -172,7 +188,7 @@ function FoodInProgress(props) {
         <textarea
           className="text-area"
           ref={ textArea }
-          value={ `http://localhost:3000${pathname}` }
+          value={ `http://localhost:3000/${id}` }
         />
         <button
           data-testid="finish-recipe-btn"
