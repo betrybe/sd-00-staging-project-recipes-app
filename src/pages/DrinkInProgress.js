@@ -191,7 +191,7 @@ function DrinkInProgress(props) {
       />
       <button
         data-testid="finish-recipe-btn"
-        type="submit"
+        type="button"
         disabled={ isDisabled }
         className={ isDisabled ? 'disabled' : 'enabled' }
         onClick={ handleFinishedRecipe }

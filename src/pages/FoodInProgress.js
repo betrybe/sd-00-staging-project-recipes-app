@@ -190,7 +190,7 @@ function FoodInProgress(props) {
       />
       <button
         data-testid="finish-recipe-btn"
-        type="submit"
+        type="button"
         disabled={ isDisabled }
         onClick={ handleFinishedRecipe }
       >
