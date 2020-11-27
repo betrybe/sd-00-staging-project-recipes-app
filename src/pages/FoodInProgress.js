@@ -162,7 +162,6 @@ function FoodInProgress(props) {
         <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
         {/* <ShareBtn copy={ copyToClipboard } /> */}
         <FavoriteBtn isFavorite={ isFavorite } changesFavorites={ changesFavorites } />
-        {/* <span className="link-copy" style={ { display: copied } }>Link copiado!</span> */}
         <p data-testid="recipe-category">{ recipe.strCategory }</p>
 
         <ul>
