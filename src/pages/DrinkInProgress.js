@@ -12,7 +12,6 @@ function DrinkInProgress(props) {
   const [recipe, setRecipe] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [ingredients, setIngredients] = useState([]);
-  const [isDisabled, setIsDisabled] = useState(true);
   const [copied, setCopied] = useState('none');
   const textArea = useRef(null);
   const now = new Date();
@@ -73,12 +72,6 @@ function DrinkInProgress(props) {
     setIngredients(TheIngredients);
   };
 
-  const verifyIngredientsChecked = () => {
-    const isAllChecked = !ingredients
-      .some((ingredient) => ingredient.isChecked === false);
-    setIsDisabled(!isAllChecked);
-  };
-
   const setLocalIngredients = () => {
     if (ingredients.length !== zero) {
       const checkeds = ingredients
@@ -111,7 +104,6 @@ function DrinkInProgress(props) {
     const ingredientsChecked = [...ingredients];
     ingredientsChecked[index].isChecked = event.target.checked;
     setIngredients(ingredientsChecked);
-    verifyIngredientsChecked();
   };
 
   const changesFavorites = () => {
@@ -132,11 +124,6 @@ function DrinkInProgress(props) {
     requestIngredients();
   }, [recipe]);
 
-  useEffect(() => {
-    requestDetailsAPI();
-    getLocalStorage();
-  }, []);
-
   const handleFinishedRecipe = () => {
     const finishedRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const arrayFinished = finishedRecipes !== null ? finishedRecipes : [];
@@ -152,8 +139,17 @@ function DrinkInProgress(props) {
       tags: '',
     });
     localStorage.setItem('doneRecipes', JSON.stringify(arrayFinished));
+
     history.push('/receitas-feitas');
   };
+
+  useEffect(() => {
+    requestDetailsAPI();
+    getLocalStorage();
+  }, []);
+
+  const isDisabled = ingredients
+    .some((ingredient) => ingredient.isChecked === false);
 
   return (
     <div>

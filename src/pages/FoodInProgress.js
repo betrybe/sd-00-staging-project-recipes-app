@@ -12,7 +12,6 @@ function FoodInProgress(props) {
   const [recipe, setRecipe] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [ingredients, setIngredients] = useState([]);
-  const [isDisabled, setIsDisabled] = useState(true);
   const [copied, setCopied] = useState('none');
   const textArea = useRef(null);
   const now = new Date();
@@ -24,6 +23,7 @@ function FoodInProgress(props) {
       meals: { [id]: [] },
     };
   }
+
   const setLocalStorage = () => {
     const readLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const favoriteRecipes = readLocalStorage !== null ? readLocalStorage : [];
@@ -71,12 +71,6 @@ function FoodInProgress(props) {
     }
     setIngredients(TheIngredients);
   };
-  const verifyIngredientsChecked = () => {
-    const isAllChecked = !ingredients
-      .some((ingredient) => ingredient.isChecked === false);
-    setIsDisabled(!isAllChecked);
-    console.log(ingredients);
-  };
 
   const setLocalIngredients = () => {
     if (ingredients.length !== zero) {
@@ -110,7 +104,6 @@ function FoodInProgress(props) {
     const ingredientsChecked = [...ingredients];
     ingredientsChecked[index].isChecked = event.target.checked;
     setIngredients(ingredientsChecked);
-    verifyIngredientsChecked();
   };
 
   const changesFavorites = () => {
@@ -125,7 +118,6 @@ function FoodInProgress(props) {
 
   useEffect(() => {
     setLocalIngredients();
-    verifyIngredientsChecked();
   }, [ingredients]);
 
   useEffect(() => {
@@ -156,6 +148,8 @@ function FoodInProgress(props) {
     getLocalStorage();
   }, []);
 
+  const isDisabled = ingredients.some((ingredient) => ingredient.isChecked === false);
+
   return (
     <div>
       <form onSubmit={ handleFinishedRecipe }>
@@ -170,6 +164,7 @@ function FoodInProgress(props) {
         <FavoriteBtn isFavorite={ isFavorite } changesFavorites={ changesFavorites } />
         <span className="link-copy" style={ { display: copied } }>Link copiado!</span>
         <p data-testid="recipe-category">{ recipe.strCategory }</p>
+
         <ul>
           Ingredientes:
           {ingredients.map((ingredient, index) => (
