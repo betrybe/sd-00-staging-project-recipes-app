@@ -172,7 +172,7 @@ function DrinkInProgress(props) {
             <li data-testid={ `${index}-ingredient-step` } key={ index }>
               { ingredient.value }
               <input
-                className={ ingredients.isChecked ? 'checked' : '' }
+                className={ ingredient.isChecked ? 'checked' : '' }
                 key={ ingredient.id }
                 type="checkbox"
                 value={ ingredient.value }
@@ -192,6 +192,7 @@ function DrinkInProgress(props) {
           data-testid="finish-recipe-btn"
           type="submit"
           disabled={ isDisabled }
+          className={ isDisabled ? 'disabled' : 'enabled' }
         >
           Finalizar receita
         </button>

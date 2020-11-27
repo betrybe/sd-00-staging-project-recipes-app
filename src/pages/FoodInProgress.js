@@ -171,7 +171,7 @@ function FoodInProgress(props) {
             <li data-testid={ `${index}-ingredient-step` } key={ index }>
               { ingredient.value }
               <input
-                className={ ingredients.isChecked ? 'checked' : '' }
+                className={ ingredient.isChecked ? 'checked' : '' }
                 key={ ingredient.id }
                 type="checkbox"
                 value={ ingredient.value }
@@ -185,7 +185,7 @@ function FoodInProgress(props) {
         <textarea
           className="text-area"
           ref={ textArea }
-          value={ `http://localhost:3000${pathname}` }
+          value={ `http://localhost:3000/comidas/${id}` }
         />
         <button
           data-testid="finish-recipe-btn"
