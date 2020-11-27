@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import fetchRecipes from '../services';
 import FavoriteBtn from '../components/FavoriteBtn';
-import ShareBtn from '../components/ShareBtn';
+// import ShareBtn from '../components/ShareBtn';
 import './RecipeInProgress.css';
 
 function FoodInProgress(props) {
@@ -12,7 +12,7 @@ function FoodInProgress(props) {
   const [recipe, setRecipe] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [ingredients, setIngredients] = useState([]);
-  const [copied, setCopied] = useState('none');
+  // const [copied, setCopied] = useState('none');
   const textArea = useRef(null);
   const now = new Date();
   let progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -162,7 +162,7 @@ function FoodInProgress(props) {
         <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
         {/* <ShareBtn copy={ copyToClipboard } /> */}
         <FavoriteBtn isFavorite={ isFavorite } changesFavorites={ changesFavorites } />
-        <span className="link-copy" style={ { display: copied } }>Link copiado!</span>
+        {/* <span className="link-copy" style={ { display: copied } }>Link copiado!</span> */}
         <p data-testid="recipe-category">{ recipe.strCategory }</p>
 
         <ul>
