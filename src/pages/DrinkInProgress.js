@@ -184,7 +184,7 @@ function DrinkInProgress(props) {
 
         Ingredientes:
         {ingredients.map((ingredient, index) => (
-          <label data-testid={ `${index}-ingredient-step` } key={ ingredient.idDrink }>
+          <li data-testid={ `${index}-ingredient-step` } key={ ingredient.idDrink }>
             { ingredient.value }
             { ingredient.isChecked ? (
               <input
@@ -202,7 +202,7 @@ function DrinkInProgress(props) {
                 onChange={ (ev) => handleCheckedIngredient(ev, index) }
               />
             )}
-          </label>
+          </li>
         ))}
 
         <p data-testid="instructions">{ recipe.strInstructions }</p>
