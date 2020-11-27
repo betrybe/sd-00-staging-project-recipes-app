@@ -42,7 +42,7 @@ function DrinkInProgress(props) {
   const copyToClipboard = (e) => {
     textArea.current.select();
     document.execCommand('copy');
-    // e.target.focus();
+    e.target.focus();
     setCopied('block');
   };
 
