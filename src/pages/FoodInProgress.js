@@ -7,7 +7,7 @@ import ShareBtn from '../components/ShareBtn';
 import './RecipeInProgress.css';
 
 function FoodInProgress(props) {
-  const { match: { params: { id } }, location: { pathname } } = props;
+  const { match: { params: { id } } } = props;
   const history = useHistory();
   const [recipe, setRecipe] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -171,10 +171,10 @@ function FoodInProgress(props) {
             <li
               data-testid={ `${index}-ingredient-step` }
               key={ index }
-              className={ ingredient.isChecked ? 'checked' : '' }
             >
               { ingredient.value }
               <input
+                className={ ingredient.isChecked ? 'checked' : '' }
                 key={ ingredient.id }
                 type="checkbox"
                 value={ ingredient.value }
@@ -208,7 +208,6 @@ FoodInProgress.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
-  location: PropTypes.func.isRequired,
 };
 
 export default FoodInProgress;

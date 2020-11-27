@@ -7,7 +7,7 @@ import ShareBtn from '../components/ShareBtn';
 import './RecipeInProgress.css';
 
 function DrinkInProgress(props) {
-  const { match: { params: { id } }, location: { pathname } } = props;
+  const { match: { params: { id } } } = props;
   const history = useHistory();
   const [recipe, setRecipe] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -42,7 +42,7 @@ function DrinkInProgress(props) {
   const copyToClipboard = (e) => {
     textArea.current.select();
     document.execCommand('copy');
-    e.target.focus();
+    // e.target.focus();
     setCopied('block');
   };
 
@@ -172,12 +172,12 @@ function DrinkInProgress(props) {
             <li
               data-testid={ `${index}-ingredient-step` }
               key={ index }
-              className={ ingredient.isChecked ? 'checked' : '' }
             >
               { ingredient.value }
               <input
                 key={ ingredient.id }
                 type="checkbox"
+                className={ ingredient.isChecked ? 'checked' : '' }
                 value={ ingredient.value }
                 checked={ ingredient.isChecked }
                 onChange={ (ev) => handleCheckedIngredient(ev, index) }
@@ -210,7 +210,6 @@ DrinkInProgress.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
-  location: PropTypes.func.isRequired,
 };
 
 export default DrinkInProgress;
