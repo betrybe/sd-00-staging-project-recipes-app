@@ -39,12 +39,12 @@ function FoodInProgress(props) {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
   };
 
-  const copyToClipboard = (e) => {
-    textArea.current.select();
-    document.execCommand('copy');
-    e.target.focus();
-    setCopied('block');
-  };
+  // const copyToClipboard = (e) => {
+  //   textArea.current.select();
+  //   document.execCommand('copy');
+  //   e.target.focus();
+  //   setCopied('block');
+  // };
 
   const recipeAPI = async () => {
     const response = await fetchRecipes(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -160,7 +160,7 @@ function FoodInProgress(props) {
           alt={ recipe.strDrink }
         />
         <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-        <ShareBtn copy={ copyToClipboard } />
+        {/* <ShareBtn copy={ copyToClipboard } /> */}
         <FavoriteBtn isFavorite={ isFavorite } changesFavorites={ changesFavorites } />
         <span className="link-copy" style={ { display: copied } }>Link copiado!</span>
         <p data-testid="recipe-category">{ recipe.strCategory }</p>
