@@ -75,6 +75,7 @@ function FoodInProgress(props) {
     const isAllChecked = !ingredients
       .some((ingredient) => ingredient.isChecked === false);
     setIsDisabled(!isAllChecked);
+    console.log(ingredients);
   };
 
   const setLocalIngredients = () => {
@@ -124,16 +125,12 @@ function FoodInProgress(props) {
 
   useEffect(() => {
     setLocalIngredients();
+    verifyIngredientsChecked();
   }, [ingredients]);
 
   useEffect(() => {
     requestIngredients();
   }, [recipe]);
-
-  useEffect(() => {
-    recipeAPI();
-    getLocalStorage();
-  }, []);
 
   const handleFinishedRecipe = () => {
     const finishedRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -150,8 +147,14 @@ function FoodInProgress(props) {
       tags: recipe.strTags,
     });
     localStorage.setItem('doneRecipes', JSON.stringify(arrayFinished));
+
     history.push('/receitas-feitas');
   };
+
+  useEffect(() => {
+    recipeAPI();
+    getLocalStorage();
+  }, []);
 
   return (
     <div>
@@ -173,6 +176,7 @@ function FoodInProgress(props) {
             <li data-testid={ `${index}-ingredient-step` } key={ index }>
               { ingredient.value }
               <input
+                className={ ingredients.isChecked ? 'checked' : '' }
                 key={ ingredient.id }
                 type="checkbox"
                 value={ ingredient.value }
