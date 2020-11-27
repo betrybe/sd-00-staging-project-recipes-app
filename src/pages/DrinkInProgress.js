@@ -52,8 +52,6 @@ function DrinkInProgress(props) {
     setRecipe(response.drinks[0]);
   };
 
-console.log('ingredients', ingredients)
-
   const requestIngredients = () => {
     const twentyOne = 21;
     const TheIngredients = [];
