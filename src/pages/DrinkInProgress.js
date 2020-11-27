@@ -135,7 +135,6 @@ function DrinkInProgress(props) {
   useEffect(() => {
     requestDetailsAPI();
     getLocalStorage();
-    verifyIngredientsChecked();
   }, []);
 
   const handleFinishedRecipe = () => {
