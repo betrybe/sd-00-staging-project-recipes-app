@@ -149,7 +149,7 @@ function DrinkInProgress(props) {
   }, []);
 
   const handleFinishedRecipe = (e) => {
-    e.preventDeafault();
+    e.preventDefault();
     const finishedRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const arrayFinished = finishedRecipes !== null ? finishedRecipes : [];
     arrayFinished.push({
