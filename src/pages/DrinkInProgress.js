@@ -173,7 +173,11 @@ function DrinkInProgress(props) {
         <ul>
           Ingredientes:
           {ingredients.map((ingredient, index) => (
-            <li data-testid={ `${index}-ingredient-step` } key={ index }>
+            <li
+              data-testid={ `${index}-ingredient-step` }
+              key={ index }
+              className={ ingredients.isChecked ? 'checked' : '' }
+            >
               { ingredient.value }
               <input
                 key={ ingredient.id }
