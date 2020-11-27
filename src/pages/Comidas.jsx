@@ -75,14 +75,14 @@ export default function Comidas({ history }) {
     <div>
       <Header titulo={ titulo } />
       <Lupa onClick={ onClick } />
-      <button
+      {/* <button
         type="button"
         onClick={ () => fetchFoods() }
         data-testid="All-category-filter"
       >
         All
-      </button>
-      {categories.map((categorie) => (
+      </button> */}
+      {/* {categories.map((categorie) => (
         <button
           data-testid={ `${categorie}-category-filter` }
           selected={ selected }
@@ -93,9 +93,9 @@ export default function Comidas({ history }) {
         >
           {categorie}
         </button>
-      ))}
+      ))} */}
       {hidden ? '' : <SearchBar />}
-      <h1>{ titulo }</h1>
+      {/* <h1>{ titulo }</h1> */}
       {loading || showMealsByIngredient ? <p>Loading</p>
         : meals.filter((meal, index) => meal && index < twelve)
           .map((meal, index) => (
