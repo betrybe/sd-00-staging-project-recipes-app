@@ -19,13 +19,13 @@ export default function Comidas({ history }) {
     setMeals,
     showMealsByIngredient } = useContext(Context);
   const [hidden, setHidden] = useState(true);
-  const [selected] = useState(false);
+  // const [selected] = useState(false);
 
   const onClick = () => {
     setHidden(!hidden);
   };
 
-  const categories = ['Beef', 'Goat', 'Chicken', 'Breakfast', 'Dessert'];
+  // const categories = ['Beef', 'Goat', 'Chicken', 'Breakfast', 'Dessert'];
 
   const fetchFoods = async () => {
     setLoading(true);
@@ -55,19 +55,19 @@ export default function Comidas({ history }) {
     history.push(`/comidas/${id}`);
   };
 
-  const clickCategory = async ({ target }) => {
-    if (target.selected === false) {
-      setLoading(true);
-      const cmeals = await api.fetchFoodByCategory(target.value);
-      setMeals(cmeals);
-      // setSelected(true);
-      setLoading(false);
-    }
-    if (target.selected === true) {
-      fetchFoods();
-      // setSelected(false);
-    }
-  };
+  // const clickCategory = async ({ target }) => {
+  //   if (target.selected === false) {
+  //     setLoading(true);
+  //     const cmeals = await api.fetchFoodByCategory(target.value);
+  //     setMeals(cmeals);
+  //     // setSelected(true);
+  //     setLoading(false);
+  //   }
+  //   if (target.selected === true) {
+  //     fetchFoods();
+  //     // setSelected(false);
+  //   }
+  // };
 
   const twelve = 12;
 
