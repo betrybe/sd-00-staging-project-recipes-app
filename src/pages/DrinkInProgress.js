@@ -169,10 +169,13 @@ function DrinkInProgress(props) {
         <ul>
           Ingredientes:
           {ingredients.map((ingredient, index) => (
-            <li data-testid={ `${index}-ingredient-step` } key={ index }>
+            <li
+              data-testid={ `${index}-ingredient-step` }
+              key={ index }
+              className={ ingredient.isChecked ? 'checked' : '' }
+            >
               { ingredient.value }
               <input
-                className={ ingredient.isChecked ? 'checked' : '' }
                 key={ ingredient.id }
                 type="checkbox"
                 value={ ingredient.value }
@@ -186,7 +189,7 @@ function DrinkInProgress(props) {
         <textarea
           className="text-area"
           ref={ textArea }
-          value={ `http://localhost:3000${pathname}` }
+          value={ `http://localhost:3000/bebidas/${id}` }
         />
         <button
           data-testid="finish-recipe-btn"

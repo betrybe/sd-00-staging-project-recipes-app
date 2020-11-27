@@ -168,10 +168,13 @@ function FoodInProgress(props) {
         <ul>
           Ingredientes:
           {ingredients.map((ingredient, index) => (
-            <li data-testid={ `${index}-ingredient-step` } key={ index }>
+            <li
+              data-testid={ `${index}-ingredient-step` }
+              key={ index }
+              className={ ingredient.isChecked ? 'checked' : '' }
+            >
               { ingredient.value }
               <input
-                className={ ingredient.isChecked ? 'checked' : '' }
                 key={ ingredient.id }
                 type="checkbox"
                 value={ ingredient.value }
