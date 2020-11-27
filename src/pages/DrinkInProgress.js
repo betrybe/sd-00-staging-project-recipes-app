@@ -153,52 +153,51 @@ function DrinkInProgress(props) {
 
   return (
     <div>
-      <form onSubmit={ handleFinishedRecipe }>
-        <img
-          className="picture"
-          data-testid="recipe-photo"
-          src={ recipe.strDrinkThumb }
-          alt={ recipe.strDrink }
-        />
-        <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-        {/* <ShareBtn copy={ copyToClipboard } /> */}
-        <FavoriteBtn isFavorite={ isFavorite } changesFavorites={ changesFavorites } />
-        <p data-testid="recipe-category">{ recipe.strCategory }</p>
+      <img
+        className="picture"
+        data-testid="recipe-photo"
+        src={ recipe.strDrinkThumb }
+        alt={ recipe.strDrink }
+      />
+      <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+      {/* <ShareBtn copy={ copyToClipboard } /> */}
+      <FavoriteBtn isFavorite={ isFavorite } changesFavorites={ changesFavorites } />
+      <p data-testid="recipe-category">{ recipe.strCategory }</p>
 
-        <ul>
-          Ingredientes:
-          {ingredients.map((ingredient, index) => (
-            <li
-              data-testid={ `${index}-ingredient-step` }
-              key={ index }
-            >
-              { ingredient.value }
-              <input
-                key={ ingredient.id }
-                type="checkbox"
-                className={ ingredient.isChecked ? 'checked' : '' }
-                value={ ingredient.value }
-                checked={ ingredient.isChecked }
-                onChange={ (ev) => handleCheckedIngredient(ev, index) }
-              />
-            </li>
-          ))}
-        </ul>
-        <p data-testid="instructions">{ recipe.strInstructions }</p>
-        <textarea
-          className="text-area"
-          ref={ textArea }
-          value={ `http://localhost:3000/bebidas/${id}` }
-        />
-        <button
-          data-testid="finish-recipe-btn"
-          type="submit"
-          disabled={ isDisabled }
-          className={ isDisabled ? 'disabled' : 'enabled' }
-        >
-          Finalizar receita
-        </button>
-      </form>
+      <ul>
+        Ingredientes:
+        {ingredients.map((ingredient, index) => (
+          <li
+            data-testid={ `${index}-ingredient-step` }
+            key={ index }
+          >
+            { ingredient.value }
+            <input
+              key={ ingredient.id }
+              type="checkbox"
+              className={ ingredient.isChecked ? 'checked' : '' }
+              value={ ingredient.value }
+              checked={ ingredient.isChecked }
+              onChange={ (ev) => handleCheckedIngredient(ev, index) }
+            />
+          </li>
+        ))}
+      </ul>
+      <p data-testid="instructions">{ recipe.strInstructions }</p>
+      <textarea
+        className="text-area"
+        ref={ textArea }
+        value={ `http://localhost:3000/bebidas/${id}` }
+      />
+      <button
+        data-testid="finish-recipe-btn"
+        type="submit"
+        disabled={ isDisabled }
+        className={ isDisabled ? 'disabled' : 'enabled' }
+        onClick={ handleFinishedRecipe }
+      >
+        Finalizar receita
+      </button>
     </div>
   );
 }

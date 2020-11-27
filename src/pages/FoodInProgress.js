@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import fetchRecipes from '../services';
 import FavoriteBtn from '../components/FavoriteBtn';
-// import ShareBtn from '../components/ShareBtn';
+import ShareBtn from '../components/ShareBtn';
 import './RecipeInProgress.css';
 
 function FoodInProgress(props) {
@@ -39,12 +39,12 @@ function FoodInProgress(props) {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
   };
 
-  // const copyToClipboard = (e) => {
-  //   textArea.current.select();
-  //   document.execCommand('copy');
-  //   e.target.focus();
-  //   setCopied('block');
-  // };
+  const copyToClipboard = (e) => {
+    textArea.current.select();
+    document.execCommand('copy');
+    e.target.focus();
+    // setCopied('block');
+  };
 
   const recipeAPI = async () => {
     const response = await fetchRecipes(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -152,51 +152,50 @@ function FoodInProgress(props) {
 
   return (
     <div>
-      <form onSubmit={ handleFinishedRecipe }>
-        <img
-          className="picture"
-          data-testid="recipe-photo"
-          src={ recipe.strDrinkThumb }
-          alt={ recipe.strDrink }
-        />
-        <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-        {/* <ShareBtn copy={ copyToClipboard } /> */}
-        <FavoriteBtn isFavorite={ isFavorite } changesFavorites={ changesFavorites } />
-        <p data-testid="recipe-category">{ recipe.strCategory }</p>
+      <img
+        className="picture"
+        data-testid="recipe-photo"
+        src={ recipe.strDrinkThumb }
+        alt={ recipe.strDrink }
+      />
+      <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+      <ShareBtn copy={ copyToClipboard } />
+      <FavoriteBtn isFavorite={ isFavorite } changesFavorites={ changesFavorites } />
+      <p data-testid="recipe-category">{ recipe.strCategory }</p>
 
-        <ul>
-          Ingredientes:
-          {ingredients.map((ingredient, index) => (
-            <li
-              data-testid={ `${index}-ingredient-step` }
-              key={ index }
-            >
-              { ingredient.value }
-              <input
-                className={ ingredient.isChecked ? 'checked' : '' }
-                key={ ingredient.id }
-                type="checkbox"
-                value={ ingredient.value }
-                checked={ ingredient.isChecked }
-                onChange={ (ev) => handleCheckedIngredient(ev, index) }
-              />
-            </li>
-          ))}
-        </ul>
-        <p data-testid="instructions">{ recipe.strInstructions }</p>
-        <textarea
-          className="text-area"
-          ref={ textArea }
-          value={ `http://localhost:3000/comidas/${id}` }
-        />
-        <button
-          data-testid="finish-recipe-btn"
-          type="submit"
-          disabled={ isDisabled }
-        >
-          Finalizar receita
-        </button>
-      </form>
+      <ul>
+        Ingredientes:
+        {ingredients.map((ingredient, index) => (
+          <li
+            data-testid={ `${index}-ingredient-step` }
+            key={ index }
+          >
+            { ingredient.value }
+            <input
+              className={ ingredient.isChecked ? 'checked' : '' }
+              key={ ingredient.id }
+              type="checkbox"
+              value={ ingredient.value }
+              checked={ ingredient.isChecked }
+              onChange={ (ev) => handleCheckedIngredient(ev, index) }
+            />
+          </li>
+        ))}
+      </ul>
+      <p data-testid="instructions">{ recipe.strInstructions }</p>
+      <textarea
+        className="text-area"
+        ref={ textArea }
+        value={ `http://localhost:3000/comidas/${id}` }
+      />
+      <button
+        data-testid="finish-recipe-btn"
+        type="submit"
+        disabled={ isDisabled }
+        onClick={ handleFinishedRecipe }
+      >
+        Finalizar receita
+      </button>
     </div>
   );
 }
