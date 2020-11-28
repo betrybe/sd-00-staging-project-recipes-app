@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import searchImage from '../images/searchIcon.svg';
 
-export default function Lupa({ onClick }) {
+function Lupa({ onClick }) {
   return (
     <div>
       <button type="button" onClick={ onClick }>
@@ -19,3 +19,5 @@ export default function Lupa({ onClick }) {
 Lupa.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
+
+export default Lupa;
