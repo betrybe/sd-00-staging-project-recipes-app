@@ -17,12 +17,12 @@ export default function Bebidas({ history }) {
     drinksByIngredient,
     setDrinks,
     showDrinksByIngredient } = useContext(Context);
-  const [hidden, setHidden] = useState(true);
+  // const [hidden, setHidden] = useState(true);
   const [selected] = useState(false);
 
-  const onClick = () => {
-    setHidden(!hidden);
-  };
+  // const onClick = () => {
+  //   setHidden(!hidden);
+  // };
 
   const categories = [
     'Ordinary Drink',
@@ -93,7 +93,7 @@ export default function Bebidas({ history }) {
           {categorie}
         </button>
       ))}
-      {hidden ? '' : <SearchBar />}
+      {/* {hidden ? '' : <SearchBar />} */}
       <h1>{ titulo }</h1>
       {loading || showDrinksByIngredient ? <p>Loading</p>
         : drinks.filter((drink, index) => drink && index < twelve)

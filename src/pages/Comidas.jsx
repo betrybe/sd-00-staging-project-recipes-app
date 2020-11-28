@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import Context from '../context/Context';
-import Lupa from '../Components/Lupa';
+// import Lupa from '../Components/Lupa';
 import SearchBar from '../Components/SearchBar';
 import Footer from '../Components/Footer';
 import FoodCard from '../Components/FoodCard';
@@ -18,12 +18,12 @@ export default function Comidas({ history }) {
     mealsByIngredient,
     setMeals,
     showMealsByIngredient } = useContext(Context);
-  const [hidden, setHidden] = useState(true);
+  // const [hidden, setHidden] = useState(true);
   // const [selected] = useState(false);
 
-  const onClick = () => {
-    setHidden(!hidden);
-  };
+  // const onClick = () => {
+  //   setHidden(!hidden);
+  // };
 
   // const categories = ['Beef', 'Goat', 'Chicken', 'Breakfast', 'Dessert'];
 
@@ -95,7 +95,7 @@ export default function Comidas({ history }) {
           {categorie}
         </button>
       ))} */}
-      {hidden ? '' : <SearchBar />}
+      {/* {hidden ? '' : <SearchBar />} */}
       {/* <h1>{ titulo }</h1> */}
       {loading || showMealsByIngredient ? <p>Loading</p>
         : meals.filter((meal, index) => meal && index < twelve)
