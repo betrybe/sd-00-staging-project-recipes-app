@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import Context from '../context/Context';
 import * as api from '../services/Api';
+import searchImage from '../images/searchIcon.svg';
 
 function SearchBar() {
   const [searchParam, setSearchParam] = useState('');
   const [termoBusca, setTermoBusca] = useState('');
+  const [clickSearch, setClickSearch] = useState(false);
   const { setMeals, setDrinks, setLoading, titulo } = useContext(Context);
 
   const handleChange = ({ target }) => {
@@ -60,6 +62,7 @@ function SearchBar() {
   };
 
   const onClick = () => {
+    setClickSearch(!clickSearch);
     if (titulo === 'Comidas') {
       buscaComidas();
     }
@@ -70,13 +73,20 @@ function SearchBar() {
 
   return (
     <div>
-      <input
+      {clickSearch && <input
         type="text"
         name="search"
         value={ termoBusca }
         data-testid="search-input"
         onChange={ (evento) => setTermoBusca(evento.target.value) }
-      />
+      />}
+      <button type="button" onClick={ onClick }>
+        <img
+          data-testid="search-top-btn"
+          src={ searchImage }
+          alt="search"
+        />
+      </button>
       <input
         type="radio"
         name="search"

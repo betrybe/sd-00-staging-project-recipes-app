@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
 import Header from '../Components/Header';
-import Lupa from '../Components/Lupa';
+// import Lupa from '../Components/Lupa';
 import Footer from '../Components/Footer';
 import FoodCard from '../Components/FoodCard';
 import * as api from '../services/Api';
@@ -56,7 +56,7 @@ export default function ExplorarComidasLocalOrigem({ history }) {
   return (
     <div>
       <Header titulo={ titulo } />
-      <Lupa />
+      {/* <Lupa /> */}
       {loading ? <p>Loading</p>
         : (
           <div>
