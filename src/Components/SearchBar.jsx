@@ -1,13 +1,11 @@
 import React, { useState, useContext } from 'react';
 import Context from '../context/Context';
 import * as api from '../services/Api';
-import searchImage from '../images/searchIcon.svg';
 
 function SearchBar() {
   const [searchParam, setSearchParam] = useState('');
   const [termoBusca, setTermoBusca] = useState('');
-  const [clickSearch, setClickSearch] = useState(false);
-  const { setMeals, setDrinks, setLoading, titulo } = useContext(Context);
+  const { setSearch, setMeals, setDrinks, setLoading, titulo } = useContext(Context);
 
   const handleChange = ({ target }) => {
     setSearchParam(target.value);
@@ -23,15 +21,21 @@ function SearchBar() {
     if (searchParam === 'name') {
       setLoading(true);
       const filteredMeals = await api.fetchFoodByName(termoBusca);
+      if (searchParam && !filteredMeals) {
+        setLoading(false);
+        // eslint-disable-next-line no-alert
+        return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      }
       setMeals(filteredMeals);
       setLoading(false);
     }
+
     if (termoBusca.length === 1 && searchParam === 'first-letter') {
       setLoading(true);
       const filteredMeals = await api.fetchFoodByFirstLetter(termoBusca);
       setMeals(filteredMeals);
       setLoading(false);
-    } else if (searchParam === 'first-letter' && termoBusca.length > 1) {
+    } else if (searchParam === 'first-letter' && termoBusca) {
       // eslint-disable-next-line no-alert
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
@@ -44,27 +48,34 @@ function SearchBar() {
       setDrinks(filteredDrinks);
       setLoading(false);
     }
+
     if (searchParam === 'name') {
       setLoading(true);
       const filteredDrink = await api.fetchDrinkByName(termoBusca);
+      if (searchParam && !filteredDrink) {
+        setLoading(false);
+        // eslint-disable-next-line no-alert
+        return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      }
       setDrinks(filteredDrink);
       setLoading(false);
     }
+
     if (termoBusca.length === 1 && searchParam === 'first-letter') {
       setLoading(true);
       const filteredDrink = await api.fetchDrinkByFirstLetter(termoBusca);
       setDrinks(filteredDrink);
       setLoading(false);
-    } else if (searchParam === 'first-letter' && termoBusca.length > 1) {
+    } else if (searchParam === 'first-letter' && termoBusca) {
       // eslint-disable-next-line no-alert
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
   };
 
   const onClick = () => {
-    setClickSearch(!clickSearch);
     if (titulo === 'Comidas') {
       buscaComidas();
+      setSearch(true);
     }
     if (titulo === 'Bebidas') {
       buscaBebidas();
@@ -73,20 +84,13 @@ function SearchBar() {
 
   return (
     <div>
-      {clickSearch && <input
+      <input
         type="text"
         name="search"
         value={ termoBusca }
         data-testid="search-input"
         onChange={ (evento) => setTermoBusca(evento.target.value) }
-      />}
-      <button type="button" onClick={ onClick }>
-        <img
-          data-testid="search-top-btn"
-          src={ searchImage }
-          alt="search"
-        />
-      </button>
+      />
       <input
         type="radio"
         name="search"

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 import profileImage from '../images/profileIcon.svg';
 
-function Header() {
+export default function Header() {
   const { titulo } = useContext(Context);
 
   return (
@@ -24,5 +24,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;

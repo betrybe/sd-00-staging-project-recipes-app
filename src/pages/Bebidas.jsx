@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
 import Header from '../Components/Header';
+import Lupa from '../Components/Lupa';
 import SearchBar from '../Components/SearchBar';
 import Footer from '../Components/Footer';
 import DrinkCard from '../Components/DrinkCard';
@@ -17,12 +18,12 @@ export default function Bebidas({ history }) {
     drinksByIngredient,
     setDrinks,
     showDrinksByIngredient } = useContext(Context);
-  // const [hidden, setHidden] = useState(true);
+  const [hidden, setHidden] = useState(true);
   const [selected] = useState(false);
 
-  // const onClick = () => {
-  //   setHidden(!hidden);
-  // };
+  const onClick = () => {
+    setHidden(!hidden);
+  };
 
   const categories = [
     'Ordinary Drink',
@@ -59,12 +60,12 @@ export default function Bebidas({ history }) {
       setLoading(true);
       const cdrinks = await api.fetchDrinkByCategory(target.value);
       setDrinks(cdrinks);
-      // setSelected(true);
       setLoading(false);
     }
     if (target.selected === true) {
       fetchDrinks();
     }
+    // setSelected(!selected);
   };
 
   const twelve = 12;
@@ -72,8 +73,7 @@ export default function Bebidas({ history }) {
   return (
     <div>
       <Header titulo={ titulo } />
-      {/* <Lupa onClick={ onClick } /> */}
-      <SearchBar />
+      <Lupa onClick={ onClick } />
       <button
         type="button"
         onClick={ () => fetchDrinks() }
@@ -93,8 +93,8 @@ export default function Bebidas({ history }) {
           {categorie}
         </button>
       ))}
-      {/* {hidden ? '' : <SearchBar />} */}
-      <h1>{ titulo }</h1>
+      {hidden ? '' : <SearchBar />}
+      {/* <h1>{ titulo }</h1> */}
       {loading || showDrinksByIngredient ? <p>Loading</p>
         : drinks.filter((drink, index) => drink && index < twelve)
           .map((drink, index) => (
