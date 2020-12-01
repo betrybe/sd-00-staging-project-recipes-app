@@ -60,12 +60,12 @@ export default function Bebidas({ history }) {
       setLoading(true);
       const cdrinks = await api.fetchDrinkByCategory(target.value);
       setDrinks(cdrinks);
-      // setSelected(true);
       setLoading(false);
     }
     if (target.selected === true) {
       fetchDrinks();
     }
+    // setSelected(!selected);
   };
 
   const twelve = 12;
@@ -94,7 +94,7 @@ export default function Bebidas({ history }) {
         </button>
       ))}
       {hidden ? '' : <SearchBar />}
-      <h1>{ titulo }</h1>
+      {/* <h1>{ titulo }</h1> */}
       {loading || showDrinksByIngredient ? <p>Loading</p>
         : drinks.filter((drink, index) => drink && index < twelve)
           .map((drink, index) => (
