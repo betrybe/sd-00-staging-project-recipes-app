@@ -17,15 +17,16 @@ export default function Comidas({ history }) {
     meals,
     mealsByIngredient,
     setMeals,
-    showMealsByIngredient } = useContext(Context);
+    showMealsByIngredient,
+    search } = useContext(Context);
   const [hidden, setHidden] = useState(true);
-  // const [selected] = useState(false);
+  const [selected] = useState(false);
 
   const onClick = () => {
     setHidden(!hidden);
   };
 
-  // const categories = ['Beef', 'Goat', 'Chicken', 'Breakfast', 'Dessert'];
+  const categories = ['Beef', 'Goat', 'Chicken', 'Breakfast', 'Dessert'];
 
   const fetchFoods = async () => {
     setLoading(true);
@@ -40,13 +41,7 @@ export default function Comidas({ history }) {
   }, []);
 
   useEffect(() => {
-    // if (!meals) {
-    //   // eslint-disable-next-line no-alert
-    //   console.log(meals);
-    //   alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    //   return history.push('/comidas');
-    // }
-    if (meals.length === 1) {
+    if (meals.length === 1 && search) {
       history.push(`/comidas/${meals[0].idMeal}`);
     }
   }, [meals]);
@@ -55,19 +50,18 @@ export default function Comidas({ history }) {
     history.push(`/comidas/${id}`);
   };
 
-  // const clickCategory = async ({ target }) => {
-  //   if (target.selected === false) {
-  //     setLoading(true);
-  //     const cmeals = await api.fetchFoodByCategory(target.value);
-  //     setMeals(cmeals);
-  //     // setSelected(true);
-  //     setLoading(false);
-  //   }
-  //   if (target.selected === true) {
-  //     fetchFoods();
-  //     // setSelected(false);
-  //   }
-  // };
+  const clickCategory = async ({ target }) => {
+    if (target.selected === false) {
+      setLoading(true);
+      const cmeals = await api.fetchFoodByCategory(target.value);
+      setMeals(cmeals);
+      setLoading(false);
+    }
+    if (target.selected === true) {
+      fetchFoods();
+    }
+    // setSelected(!selected);
+  };
 
   const twelve = 12;
 
@@ -75,14 +69,15 @@ export default function Comidas({ history }) {
     <div>
       <Header titulo={ titulo } />
       <Lupa onClick={ onClick } />
-      {/* <button
+
+      <button
         type="button"
         onClick={ () => fetchFoods() }
         data-testid="All-category-filter"
       >
         All
-      </button> */}
-      {/* {categories.map((categorie) => (
+      </button>
+      {categories.map((categorie) => (
         <button
           data-testid={ `${categorie}-category-filter` }
           selected={ selected }
@@ -93,7 +88,7 @@ export default function Comidas({ history }) {
         >
           {categorie}
         </button>
-      ))} */}
+      ))}
       {hidden ? '' : <SearchBar />}
       {/* <h1>{ titulo }</h1> */}
       {loading || showMealsByIngredient ? <p>Loading</p>
@@ -120,7 +115,7 @@ export default function Comidas({ history }) {
     </div>
   );
 }
-// comentario para push;
+
 Comidas.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
