@@ -18,12 +18,15 @@ function ExploreFoodIngredients({ type }) {
   const fetchIngredients = async () => {
     const list = await fetchMealIngredients()
 
+    // alert(JSON.stringify(list))
+
     const teste = list.meals;
 
     const teste2 = teste.slice(ZERO, TWELVE);
 
       // const teste = list.slice(ZERO, TWELVE)
-      console.log('teste', teste2)
+      // console.log('teste', teste2)
+
 
     setIngredients(teste2);
   };
@@ -37,18 +40,19 @@ function ExploreFoodIngredients({ type }) {
       <Header title="Explorar Ingredientes" />
       <section>
         {
-          ingredients.map((el, index) => (
+          ingredients.map((el, index) => {
+            return(
             <ExploreCard
               key={ index }
               index={ index }
-              name={ el[APIkey] }
+              name={ el.strIngredients }
               type={ type }
             />
-          ))
+          ) })
         }
       </section>
       <Footer />
-      { console.log('ING:', ingredients) }
+      {/* { console.log('ING:', ingredients) } */}
     </>
   );
 }

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
 
 function ExploreCard({ name, index, type }) {
+
   const imgURL = (type === 'comidas')
     ? `https://www.themealdb.com/images/ingredients/${name}-Small.png`
     : `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png`;
@@ -14,6 +15,7 @@ function ExploreCard({ name, index, type }) {
         alt={ name }
         data-testid={ `${index}-card-img` }
       />
+      { name }
       <h6 data-testid={ `${index}-card-name` }>{ name }</h6>
     </div>
   );
