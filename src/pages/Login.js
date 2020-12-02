@@ -1,74 +1,74 @@
-/* eslint-disable react/jsx-curly-spacing */
-import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { ReactComponent as Logo } from '../visual_identity/logo.svg';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import LoginForm from '../components/LoginForm';
 
-const checkLogin = (email, passwordInput) => {
-  const validEmail = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{3})$/i);
-  const PASSWORD_MIN_LENGTH = 6;
-  const validPassword = passwordInput.length > PASSWORD_MIN_LENGTH;
-  if (validEmail && validPassword) return false;
-  return true;
-};
+class Login extends Component {
+  constructor(props) {
+    super(props);
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [passwordInput, setpasswordInput] = useState('');
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [redirect, setRedirect] = useState(false);
+    this.handleChanges = this.handleChanges.bind(this);
+    this.validateInputs = this.validateInputs.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
-  useEffect(() => {
-    setIsDisabled(checkLogin(email, passwordInput));
-  }, [email, passwordInput]);
+    this.state = {
+      email: '',
+      password: '',
+      isValid: false,
+    };
+  }
 
-  const handleInput = (event) => {
-    const { name, value } = event.target;
-    if (name === 'email') setEmail(value);
-    if (name === 'password') setpasswordInput(value);
-  };
+  handleChanges({ target: { name, value } }) {
+    this.setState({
+      [name]: value,
+    }, () => {
+      this.validateInputs();
+    });
+  }
 
-  const handleLoginClick = () => {
-    localStorage.setItem('mealsToken', '1');
-    localStorage.setItem('cocktailsToken', '1');
-    const user = { email };
-    localStorage.setItem('user', JSON.stringify(user));
-    setRedirect(true);
-  };
+  handleSubmit() {
+    const { email } = this.state;
+    const { history } = this.props;
 
-  if (redirect) return <Redirect to="/comidas" />;
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email }));
+    history.push('/comidas');
+  }
 
-  return (
-    <main className="flex-center full-height light-blue-bg">
-      <h1 id="app-name">iChef</h1>
-      <Logo />
-      <div id="login-form">
-        <input
-          type="email"
-          name="email"
-          value={ email }
-          placeholder="Email"
-          data-testid="email-input"
-          onChange={ (event) => handleInput(event) }
-        />
-        <input
-          type="password"
-          name="password"
-          value={ passwordInput }
-          placeholder="Senha"
-          data-testid="password-input"
-          onChange={ (event) => handleInput(event) }
+  validateInputs() {
+    const { email, password } = this.state;
+    const EMAIL_REGEX = RegExp(/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/)
+      .test(email);
+    const PASS_VALIDATION = 7;
+    this.setState({
+      isValid: EMAIL_REGEX && password.length >= PASS_VALIDATION,
+    });
+  }
+
+  render() {
+    const { isValid } = this.state;
+
+    return (
+      <section>
+        <h1>Login</h1>
+        <LoginForm
+          handleChanges={ this.handleChanges }
         />
         <button
           type="button"
           data-testid="login-submit-btn"
-          onClick={ handleLoginClick }
-          disabled={ isDisabled }
+          onClick={ this.handleSubmit }
+          disabled={ !isValid }
         >
           Entrar
         </button>
-      </div>
-    </main>
-  );
+      </section>
+    );
+  }
 }
+
+Login.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
+};
 
 export default Login;

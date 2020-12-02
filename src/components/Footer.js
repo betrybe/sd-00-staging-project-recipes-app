@@ -1,41 +1,35 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
-// import '../visual_identity/styles/2.Layout/Footer.css';
-import { resetShouldFetch, clearState } from '../redux/actions/mainPageFetcher';
 
-const Footer = ({ clear, clearAndDontUpdate }) => (
-  <div data-testid="footer" className="position-fixed-bottom">
-    <Link to="/bebidas" onClick={ () => clear() }>
-      <button
-        type="button"
-      >
-        <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="" />
-      </button>
-    </Link>
-    <Link to="/explorar" onClick={ () => clearAndDontUpdate() }>
-      <button
-        type="button"
-      >
-        <img data-testid="explore-bottom-btn" src={ exploreIcon } alt="" />
-      </button>
-    </Link>
-    <Link to="/comidas" onClick={ () => clear() }>
-      <button
-        type="button"
-      >
-        <img data-testid="food-bottom-btn" src={ mealIcon } alt="" />
-      </button>
-    </Link>
-  </div>
+const Footer = () => (
+  <footer data-testid="footer" style={ { position: 'fixed', bottom: '0px' } }>
+    <nav>
+      <Link to="/bebidas">
+        <img
+          src={ drinkIcon }
+          alt="Drinks page"
+          data-testid="drinks-bottom-btn"
+        />
+      </Link>
+      <Link to="/explorar">
+        <img
+          src={ exploreIcon }
+          alt="Explore page"
+          data-testid="explore-bottom-btn"
+        />
+      </Link>
+      <Link to="/comidas">
+        <img
+          src={ mealIcon }
+          alt="Meals page"
+          data-testid="food-bottom-btn"
+        />
+      </Link>
+    </nav>
+  </footer>
 );
 
-const mapDispatchToProps = (dispatch) => ({
-  clear: () => dispatch(resetShouldFetch()),
-  clearAndDontUpdate: () => dispatch(clearState()),
-});
-
-export default connect(null, mapDispatchToProps)(Footer);
+export default Footer;
